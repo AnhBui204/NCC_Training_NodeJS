@@ -4,17 +4,17 @@ import CreateUserDto from './dto/user.create.dto';
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly userService: UsersService){}
+    constructor(private readonly userService: UsersService) { }
     // @Get()          // Get() => '/users'   || Get('abc') => '/users/abc' 
     // hello() {
     //     return this.userService.getUser()
     // }
 
     //Param
-    // @Get('/:id')
-    // getUserById(@Param('id') id: string){
-    //     return `Hello User ${id}`
-    // }
+    @Get('/:id')
+    getUserById(@Param('id') id: string) {
+        return this.userService.getUserById(id)
+    }
 
     //Query
     // @Get()
@@ -26,34 +26,39 @@ export class UsersController {
     // }
 
     @Get()
-    findAll(@Req() req: Request & {user: string}){
+    findAll(@Req() req: Request & { user: string }) {
         console.log(req.user)
         return this.userService.findAll()
     }
 
+    @Get('/name/:name')
+    getUserByName(@Param('name') name: string) {
+        return this.userService.getUserByName(name)
+    }
+
     //Body
     @Post()
-    createUser(@Body(new ValidationPipe()) body: CreateUserDto){
+    createUser(@Body(new ValidationPipe()) body: CreateUserDto) {
         return this.userService.createUser(body)
     }
 
     @Put('/:id')
-    editUser(@Body() body: any, @Param('id') id: string){
+    editUser(@Body() body: any, @Param('id') id: string) {
         return this.userService.editUser(body, id)
     }
 
     @Patch('/:id')
-    editUserPatch(@Body() body: any, @Param('id') id: string){
+    editUserPatch(@Body() body: any, @Param('id') id: string) {
         return this.userService.editUserPatch(body, id)
     }
 
     @Delete('/:id')
-    deleteUserById(@Param('id') id: string){
+    deleteUserById(@Param('id') id: string) {
         return this.userService.deleteUser(id)
     }
 
     @Delete()
-    deletAll(){
+    deletAll() {
         return this.userService.deleteAll()
     }
 }

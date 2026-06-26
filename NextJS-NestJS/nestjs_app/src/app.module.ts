@@ -25,11 +25,12 @@ export class AppModule {
       {
         path: '/users',
         method: RequestMethod.ALL
-      },
-      {
-        path: '/users/*',
-        method: RequestMethod.ALL
       }
+        //,
+      // {
+      //   path: '/users/*',
+      //   method: RequestMethod.ALL
+      // }
     )
   }
 }

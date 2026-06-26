@@ -17,6 +17,18 @@ export class UsersService {
         return this.db.findAll()
     }
 
+    //id
+    async getUserById(id) {
+        const user = await this.userModel.findById(id)
+        return user
+    }
+
+    //[slug]
+    async getUserByName(name) {
+        const user = await this.userModel.findOne({ name })
+        return user
+    }
+
     //create
     async createUser(data) {
         const user = await this.findUserByEmail(data.email)
