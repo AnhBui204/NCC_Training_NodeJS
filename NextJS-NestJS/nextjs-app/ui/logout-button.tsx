@@ -1,14 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { logout } from '@/app/api/auth.api';
 
 export function LogoutButton() {
     const router = useRouter();
 
-    const handleLogout = () => {
-        // Xóa cookie token
-        document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-        // Refresh và redirect về trang login
+    const handleLogout = async () => {
+        await logout();
+
         router.push('/auth/login');
         router.refresh();
     };

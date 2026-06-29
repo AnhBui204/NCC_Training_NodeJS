@@ -19,6 +19,12 @@ export class User {
 
     @Prop()
     gender: string
+
+    @Prop({ required: false, default: "USER" })
+    role: string
+
+    @Prop({ required: false })
+    refreshToken: string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

@@ -37,6 +37,7 @@ export class UsersService {
         }
         const hashPassword = await bcrypt.hash(data.password, 10)
         data.password = hashPassword
+        data.role = 'USER'
         return this.userModel.create(data)
     }
 
@@ -86,5 +87,20 @@ export class UsersService {
         const status = await bcrypt.compareSync(password, user.password)
         if (status) return user
         return null
+    }
+
+    async updateRefreshToken(userId: string, refreshToken: string | null) {
+        if (refreshToken) {
+            refreshToken = await bcrypt.hash(refreshToken, 10)
+        }
+        return this.userModel.findByIdAndUpdate(userId, { refreshToken })
+    }
+
+    async getUserIfRefreshTokenMatches(refreshToken: string, userId: string) {
+        const user = await this.getUserById(userId);
+        if (!user || !user.refreshToken) return null;
+        const isMatching = await bcrypt.compare(refreshToken, user.refreshToken);
+        if (isMatching) return user;
+        return null;
     }
 } 

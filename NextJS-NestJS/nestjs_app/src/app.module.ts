@@ -7,10 +7,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { LoggingMiddleware } from './middleware/logging/logging.middleware';
 import { AuthController } from './modules/auth/auth.controller';
 import { AuthModule } from './modules/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   controllers: [AppController],
   providers: [AppService],
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env.local'
+    }),
     MongooseModule.forRoot(
       'mongodb://localhost:27017/basic_nestjs',
       {
@@ -26,7 +31,7 @@ export class AppModule {
         path: '/users',
         method: RequestMethod.ALL
       }
-        //,
+      //,
       // {
       //   path: '/users/*',
       //   method: RequestMethod.ALL

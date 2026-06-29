@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post, Put, Delete, Patch, Param, Query, ValidationPipe, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Delete, Patch, Param, Query, ValidationPipe, Req, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import CreateUserDto from './dto/user.create.dto';
-
+import { Roles } from '@/decorators/roles.decorator';
+import { JwtAuthGuard } from '@/guards/jwt-auth.guard';
+import { RolesAuthGuard } from '@/guards/roles.guard';
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
@@ -27,32 +29,40 @@ export class UsersController {
 
     @Get()
     findAll(@Req() req: Request & { user: string }) {
-        console.log(req.user)
         return this.userService.findAll()
     }
 
     @Get('/name/:name')
+    @UseGuards(JwtAuthGuard)
     getUserByName(@Param('name') name: string) {
         return this.userService.getUserByName(name)
     }
 
     //Body
     @Post()
+    @UseGuards(JwtAuthGuard, RolesAuthGuard)
+    @Roles('ADMIN')
     createUser(@Body(new ValidationPipe()) body: CreateUserDto) {
         return this.userService.createUser(body)
     }
 
     @Put('/:id')
+    @UseGuards(JwtAuthGuard, RolesAuthGuard)
+    @Roles('ADMIN')
     editUser(@Body() body: any, @Param('id') id: string) {
         return this.userService.editUser(body, id)
     }
 
     @Patch('/:id')
+    @UseGuards(JwtAuthGuard, RolesAuthGuard)
+    @Roles('ADMIN')
     editUserPatch(@Body() body: any, @Param('id') id: string) {
         return this.userService.editUserPatch(body, id)
     }
 
     @Delete('/:id')
+    @UseGuards(JwtAuthGuard, RolesAuthGuard)
+    @Roles('ADMIN')
     deleteUserById(@Param('id') id: string) {
         return this.userService.deleteUser(id)
     }
