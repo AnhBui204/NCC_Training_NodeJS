@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <div className='min-h-screen bg-gray-50 text-gray-800 font-sans'>
-      <header className='bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10'>
+      {/* <header className='bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10'>
         <div className='max-w-6xl mx-auto px-6 py-4 flex items-center justify-between'>
           <div className='flex items-center gap-3'>
             <div className='w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-sm'>
@@ -21,13 +21,17 @@ export default async function Home() {
           <div className='flex items-center gap-6'>
             <nav className='flex gap-6 text-sm font-semibold'>
               <Link href="/blog" className='text-gray-600 hover:text-blue-600 transition-colors'>Blog Posts</Link>
-              <Link href="/users" className='text-gray-600 hover:text-blue-600 transition-colors'>Users</Link>
+              <Link href="/users" className='text-gray-600 hover:text-blue-600 transition-colors'>Users (Client)</Link>
+              <Link href="/server-users" className='text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 font-bold'>
+                <span>Users (Server RSC)</span>
+              </Link>
+              <Link href="/admin" className='text-gray-600 hover:text-red-600 transition-colors'>Admin</Link>
             </nav>
             <div className='h-4 w-px bg-gray-200'></div>
             <LogoutButton />
           </div>
         </div>
-      </header>
+      </header> */}
 
       <main className='max-w-6xl mx-auto px-6 py-8'>
         <div className='mb-8'>

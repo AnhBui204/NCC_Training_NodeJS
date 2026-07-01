@@ -7,7 +7,6 @@ export interface PostType {
 }
 
 export async function getPosts(): Promise<PostType[]> {
-  // Simulate API call with sample data
   return [
     {
       id: 1,
@@ -34,7 +33,7 @@ export async function getPosts(): Promise<PostType[]> {
 }
 
 
-export async function getPostBySlug(slug: string): Promise<PostType | null>{
-    const posts = await getPosts()
-    return posts.find(post => post.slug === slug) || null
+export async function getPostBySlug(slug: string): Promise<PostType | null> {
+  const posts = await getPosts()
+  return posts.find(post => post.slug === slug) || null
 }

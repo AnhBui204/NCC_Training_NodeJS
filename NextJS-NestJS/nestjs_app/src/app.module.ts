@@ -8,6 +8,7 @@ import { LoggingMiddleware } from './middleware/logging/logging.middleware';
 import { AuthController } from './modules/auth/auth.controller';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { AdminModule } from './modules/admin/admin.module';
 @Module({
   controllers: [AppController],
   providers: [AppService],
@@ -22,7 +23,7 @@ import { ConfigModule } from '@nestjs/config';
         autoIndex: true
       }
     ),
-    CatsModule, UsersModule, AuthModule]
+    CatsModule, UsersModule, AuthModule, AdminModule]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

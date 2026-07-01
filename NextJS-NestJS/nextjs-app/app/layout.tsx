@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import { LogoutButton } from "@/ui/logout-button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,35 @@ export default function RootLayout({
       lang="en" data-theme="light"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+
+      <body className="min-h-full flex flex-col">
+        <header className='bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10'>
+          <div className='max-w-6xl mx-auto px-6 py-4 flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+              <div className='w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-sm'>
+                N
+              </div>
+              <h1 className='text-xl font-bold text-gray-900'>NextJS Dashboard</h1>
+            </div>
+
+            <div className='flex items-center gap-6'>
+              <nav className='flex gap-6 text-sm font-semibold'>
+                <Link href="/blog" className='text-gray-600 hover:text-blue-600 transition-colors'>Blog Posts</Link>
+                <Link href="/users" className='text-gray-600 hover:text-blue-600 transition-colors'>Users (Client)</Link>
+                <Link href="/server-users" className='text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 font-bold'>
+                  <span>Users (Server RSC)</span>
+                </Link>
+                <Link href="/admin" className='text-gray-600 hover:text-red-600 transition-colors'>Admin</Link>
+              </nav>
+              <div className='h-4 w-px bg-gray-200'></div>
+              <LogoutButton />
+            </div>
+          </div>
+        </header>
+        <main className="flex-1">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
