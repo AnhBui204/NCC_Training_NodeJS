@@ -4,7 +4,7 @@ import { AdminService } from './admin.service';
 import { UsersService } from '../users/users.service';
 import { Mongoose } from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../users/schemas/users.schema';
+import { User, UserSchema } from '../../entities/schemas/users.schema';
 import { UsersModule } from '../users/users.module';
 
 @Module({

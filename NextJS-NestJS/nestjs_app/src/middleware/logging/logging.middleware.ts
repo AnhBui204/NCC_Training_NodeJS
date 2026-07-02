@@ -5,9 +5,9 @@ import { retry } from 'rxjs';
 export class LoggingMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
     // const isAuth = false
-    // if(!isAuth){
+    // if (!isAuth) {
     //   return res.status(HttpStatus.UNAUTHORIZED).json({
-    //     message: "Unauthorized"
+    //     message: "Unauthorized Logging"
     //   })
     // }
     // req.user = "ABC"

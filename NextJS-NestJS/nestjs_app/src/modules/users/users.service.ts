@@ -1,7 +1,7 @@
 import { DatabaseService } from '@/db/database.service';
 import { ConflictException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from './schemas/users.schema';
+import { User } from '../../entities/schemas/users.schema';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 

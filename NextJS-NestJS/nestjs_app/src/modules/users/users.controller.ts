@@ -4,6 +4,9 @@ import CreateUserDto from './dto/user.create.dto';
 import { Roles } from '@/decorators/roles.decorator';
 import { JwtAuthGuard } from '@/guards/jwt-auth.guard';
 import { RolesAuthGuard } from '@/guards/roles.guard';
+import { ParseMongoIdPipe } from '@/pipes/parse-mongo-id.pipe';
+import { TrimPipe } from '@/pipes/trim.pipe';
+
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) { }
@@ -14,7 +17,7 @@ export class UsersController {
 
     //Param
     @Get('/:id')
-    getUserById(@Param('id') id: string) {
+    getUserById(@Param('id', ParseMongoIdPipe) id: string) {
         return this.userService.getUserById(id)
     }
 
@@ -28,6 +31,7 @@ export class UsersController {
     // }
 
     @Get()
+    @UseGuards(JwtAuthGuard)
     findAll(@Req() req: Request & { user: string }) {
         return this.userService.findAll()
     }
@@ -42,7 +46,7 @@ export class UsersController {
     @Post()
     @UseGuards(JwtAuthGuard, RolesAuthGuard)
     @Roles('ADMIN')
-    createUser(@Body(new ValidationPipe()) body: CreateUserDto) {
+    createUser(@Body(new TrimPipe(), new ValidationPipe()) body: CreateUserDto) {
         return this.userService.createUser(body)
     }
 
